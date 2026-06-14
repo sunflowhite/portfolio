@@ -1,381 +1,113 @@
-<!DOCTYPE html>
+from pathlib import Path
+
+html = r"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NOVA</title>
-
+<title>NOVA Portfolio</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Inter,sans-serif;
-}
-
-body{
-background:#000;
-color:#fff;
-}
-
-.container{
-max-width:430px;
-margin:auto;
-min-height:100vh;
-}
-
-.topbar{
-height:60px;
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:0 16px;
-border-bottom:1px solid #262626;
-position:sticky;
-top:0;
-background:#000;
-z-index:100;
-}
-
-.profile{
-padding:24px 16px;
-}
-
-.profile-top{
-display:flex;
-align-items:center;
-gap:24px;
-}
-
-.profile-ring{
-width:96px;
-height:96px;
-padding:3px;
-border-radius:50%;
-background:linear-gradient(45deg,#F58529,#DD2A7B,#8134AF,#515BD4);
-display:flex;
-align-items:center;
-justify-content:center;
-}
-
-.logo{
-width:90px;
-height:90px;
-border-radius:50%;
-object-fit:cover;
-background:#000;
-}
-
-.stats{
-display:flex;
-gap:20px;
-flex:1;
-justify-content:space-around;
-}
-
-.stat{
-text-align:center;
-}
-
-.stat strong{
-display:block;
-font-size:18px;
-}
-
-.stat span{
-font-size:14px;
-color:#aaa;
-}
-
-.bio{
-margin-top:16px;
-}
-
-.bio p{
-font-size:14px;
-color:#aaa;
-margin-top:4px;
-}
-
-.buttons{
-display:flex;
-gap:8px;
-margin-top:16px;
-}
-
-.btn{
-flex:1;
-padding:10px;
-border-radius:8px;
-background:#262626;
-color:white;
-text-decoration:none;
-text-align:center;
-font-weight:600;
-}
-
-.highlights{
-display:flex;
-gap:16px;
-overflow-x:auto;
-padding:16px;
-border-top:1px solid #262626;
-border-bottom:1px solid #262626;
-}
-
-.highlight{
-text-align:center;
-min-width:70px;
-}
-
-.highlight-circle{
-width:64px;
-height:64px;
-border-radius:50%;
-border:2px solid #444;
-margin:auto;
-}
-
-.highlight p{
-font-size:12px;
-margin-top:6px;
-}
-
-.tabs{
-display:flex;
-border-bottom:1px solid #262626;
-}
-
-.tab{
-flex:1;
-text-align:center;
-padding:14px;
-font-weight:600;
-}
-
-.grid{
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:2px;
-background:#262626;
-}
-
-.post{
-position:relative;
-aspect-ratio:1;
-overflow:hidden;
-cursor:pointer;
-background:#111;
-}
-
-.post img{
-width:100%;
-height:100%;
-object-fit:cover;
-transition:.4s;
-}
-
-.overlay{
-position:absolute;
-inset:0;
-background:rgba(0,0,0,.45);
-opacity:0;
-display:flex;
-align-items:center;
-justify-content:center;
-transition:.3s;
-}
-
-.post:hover .overlay{
-opacity:1;
-}
-
-.post:hover img{
-transform:scale(1.08);
-}
-
-.play{
-width:60px;
-height:60px;
-border-radius:50%;
-background:rgba(255,255,255,.2);
-backdrop-filter:blur(10px);
-display:flex;
-align-items:center;
-justify-content:center;
-font-size:24px;
-}
-
-.modal{
-display:none;
-position:fixed;
-inset:0;
-background:#000;
-z-index:999;
-overflow:auto;
-}
-
-.modal-content{
-padding:20px;
-}
-
-.close{
-font-size:32px;
-cursor:pointer;
-margin-bottom:20px;
-}
-
-.video-wrapper{
-position:relative;
-padding-bottom:56.25%;
-height:0;
-overflow:hidden;
-border-radius:12px;
-}
-
-.video-wrapper iframe{
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%;
-border:none;
-}
-
-.title{
-margin-top:16px;
-font-size:22px;
-font-weight:700;
-}
-
-.category{
-margin-top:8px;
-color:#aaa;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
+body{background:#000;color:#fff}
+.header{padding:30px 20px;text-align:center}
+.logo{width:140px;height:140px;object-fit:contain;display:block;margin:0 auto 10px}
+h1{font-size:42px;letter-spacing:8px}
+.tag{color:#aaa;margin-top:8px}
+.stats{display:flex;justify-content:center;gap:30px;margin:25px 0}
+.stat{text-align:center}
+.stat b{display:block;font-size:22px}
+.buttons{display:flex;gap:10px;justify-content:center;padding:0 20px}
+.btn{background:#1f1f1f;color:#fff;text-decoration:none;padding:12px 18px;border-radius:12px}
+.feed{max-width:900px;margin:30px auto;padding:0 16px}
+.card{margin-bottom:28px;cursor:pointer}
+.thumb{position:relative;border-radius:20px;overflow:hidden;border:1px solid #222}
+.thumb img{width:100%;display:block;transition:.4s}
+.thumb:hover img{transform:scale(1.05)}
+.play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:54px;background:rgba(0,0,0,.25)}
+.title{font-size:20px;font-weight:700;margin-top:10px}
+.cat{color:#aaa;margin-top:4px}
+.modal{display:none;position:fixed;inset:0;background:#000;z-index:999;padding:20px;overflow:auto}
+.close{font-size:36px;cursor:pointer}
+.video{position:relative;padding-bottom:56.25%;height:0;margin-top:20px}
+.video iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
 </style>
 </head>
-
 <body>
 
-<div class="container">
-
-<div class="topbar">
-<h1>NOVA</h1>
-<div>☰</div>
-</div>
-
-<div class="profile">
-
-<div class="profile-top">
-
-<div class="profile-ring">
+<div class="header">
 <img src="nova-logo.png" class="logo" alt="Nova Logo">
-</div>
+<h1>NOVA</h1>
+<div class="tag">EDIT • CREATE • ELEVATE</div>
 
 <div class="stats">
-<div class="stat">
-<strong>250+</strong>
-<span>Videos</span>
-</div>
-
-<div class="stat">
-<strong>50+</strong>
-<span>Clients</span>
-</div>
-
-<div class="stat">
-<strong>100M+</strong>
-<span>Views</span>
-</div>
-</div>
-
-</div>
-
-<div class="bio">
-<h2>Nova</h2>
-<p>Video Editor & Content Studio</p>
-<p>Podcasts • Entertainment • Ads • Shorts</p>
+<div class="stat"><b>250+</b>Videos</div>
+<div class="stat"><b>50+</b>Clients</div>
+<div class="stat"><b>100M+</b>Views</div>
 </div>
 
 <div class="buttons">
-<a href="mailto:jsutreja@gmail.com" class="btn">Contact</a>
-<a href="https://wa.me/919998544660" target="_blank" class="btn">WhatsApp</a>
+<a class="btn" href="mailto:jsutreja@gmail.com">Contact</a>
+<a class="btn" target="_blank" href="https://wa.me/919998544660">WhatsApp</a>
+</div>
 </div>
 
+<div class="feed">
+
+<div class="card" onclick="openVideo('aRLhpHu6KCI','What Is Self-Compassion?')">
+<div class="thumb"><img src="https://img.youtube.com/vi/aRLhpHu6KCI/maxresdefault.jpg"><div class="play">▶</div></div>
+<div class="title">What Is Self-Compassion?</div>
+<div class="cat">Podcast Editing</div>
 </div>
 
-<div class="highlights">
-<div class="highlight"><div class="highlight-circle"></div><p>Podcasts</p></div>
-<div class="highlight"><div class="highlight-circle"></div><p>Ads</p></div>
-<div class="highlight"><div class="highlight-circle"></div><p>Reels</p></div>
-<div class="highlight"><div class="highlight-circle"></div><p>Shorts</p></div>
+<div class="card" onclick="openVideo('CdgVcAEEMC4','Do Millennials Know 2000s Songs?!')">
+<div class="thumb"><img src="https://img.youtube.com/vi/CdgVcAEEMC4/maxresdefault.jpg"><div class="play">▶</div></div>
+<div class="title">Do Millennials Know 2000s Songs?!</div>
+<div class="cat">Entertainment</div>
 </div>
 
-<div class="tabs">
-<div class="tab">POSTS</div>
-<div class="tab">REELS</div>
+<div class="card" onclick="openVideo('wAxAAnMFlMc','100 Years Of Snacks')">
+<div class="thumb"><img src="https://img.youtube.com/vi/wAxAAnMFlMc/maxresdefault.jpg"><div class="play">▶</div></div>
+<div class="title">100 Years Of Snacks</div>
+<div class="cat">Entertainment</div>
 </div>
 
-<div class="grid">
-
-<div class="post" onclick="openVideo('aRLhpHu6KCI','What Is Self-Compassion?','Podcast Editing')">
-<img src="https://img.youtube.com/vi/aRLhpHu6KCI/maxresdefault.jpg">
-<div class="overlay"><div class="play">▶</div></div>
+<div class="card" onclick="openVideo('hCi0mgS7ZEc','Top 3 Testosterone Exercises')">
+<div class="thumb"><img src="https://img.youtube.com/vi/hCi0mgS7ZEc/maxresdefault.jpg"><div class="play">▶</div></div>
+<div class="title">Top 3 Testosterone Exercises</div>
+<div class="cat">Educational</div>
 </div>
 
-<div class="post" onclick="openVideo('CdgVcAEEMC4','Do Millennials Know 2000s Songs?!','Entertainment')">
-<img src="https://img.youtube.com/vi/CdgVcAEEMC4/maxresdefault.jpg">
-<div class="overlay"><div class="play">▶</div></div>
-</div>
-
-<div class="post" onclick="openVideo('wAxAAnMFlMc','100 Years Of Snacks','Entertainment')">
-<img src="https://img.youtube.com/vi/wAxAAnMFlMc/maxresdefault.jpg">
-<div class="overlay"><div class="play">▶</div></div>
-</div>
-
-<div class="post" onclick="openVideo('hCi0mgS7ZEc','Top 3 Testosterone Exercises','Educational')">
-<img src="https://img.youtube.com/vi/hCi0mgS7ZEc/maxresdefault.jpg">
-<div class="overlay"><div class="play">▶</div></div>
-</div>
-
-<div class="post" onclick="openVideo('bdrkjMIhrDs','Little Five Points','Storytelling')">
-<img src="https://img.youtube.com/vi/bdrkjMIhrDs/maxresdefault.jpg">
-<div class="overlay"><div class="play">▶</div></div>
-</div>
-
+<div class="card" onclick="openVideo('bdrkjMIhrDs','Little Five Points')">
+<div class="thumb"><img src="https://img.youtube.com/vi/bdrkjMIhrDs/maxresdefault.jpg"><div class="play">▶</div></div>
+<div class="title">Little Five Points</div>
+<div class="cat">Storytelling</div>
 </div>
 
 </div>
 
 <div class="modal" id="modal">
-<div class="modal-content">
 <div class="close" onclick="closeVideo()">×</div>
-
-<div class="video-wrapper">
-<iframe id="videoFrame" allowfullscreen></iframe>
-</div>
-
-<div class="title" id="videoTitle"></div>
-<div class="category" id="videoCategory"></div>
-
+<h2 id="videoTitle"></h2>
+<div class="video">
+<iframe id="frame" allowfullscreen></iframe>
 </div>
 </div>
 
 <script>
-function openVideo(id,title,category){
+function openVideo(id,title){
 document.getElementById('modal').style.display='block';
-document.getElementById('videoFrame').src='https://www.youtube.com/embed/'+id+'?autoplay=1';
 document.getElementById('videoTitle').innerText=title;
-document.getElementById('videoCategory').innerText=category;
+document.getElementById('frame').src='https://www.youtube.com/embed/'+id+'?autoplay=1';
 }
-
 function closeVideo(){
 document.getElementById('modal').style.display='none';
-document.getElementById('videoFrame').src='';
+document.getElementById('frame').src='';
 }
 </script>
 
 </body>
-</html>
+</html>"""
+path = "/mnt/data/index.html"
+Path(path).write_text(html, encoding="utf-8")
+print(path)
