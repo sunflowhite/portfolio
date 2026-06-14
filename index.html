@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,7 +25,6 @@ font-family:Inter,sans-serif;
 --border:#1f1f1f;
 --text:#ffffff;
 --muted:#9ca3af;
-
 --cyan:#00E5FF;
 --violet:#8C52FF;
 }
@@ -58,292 +58,240 @@ text-align:center;
 width:380px;
 max-width:90%;
 display:block;
-
 filter:
 drop-shadow(0 0 25px rgba(0,229,255,.15))
 drop-shadow(0 0 40px rgba(140,82,255,.15));
-
 animation:floatLogo 6s ease-in-out infinite;
 }
 
 @keyframes floatLogo{
-
-0%{
-transform:translateY(0px);
-}
-
-50%{
-transform:translateY(-12px);
-}
-
-100%{
-transform:translateY(0px);
-}
-
+0%{transform:translateY(0);}
+50%{transform:translateY(-12px);}
+100%{transform:translateY(0);}
 }
 
 .hero-title{
-
 font-size:72px;
 font-weight:800;
 line-height:1;
 margin-top:35px;
-
-background:
-linear-gradient(
+background:linear-gradient(
 90deg,
 var(--cyan),
 var(--violet)
 );
-
 -webkit-background-clip:text;
 color:transparent;
 }
 
 .hero-subtitle{
-
 font-size:22px;
 margin-top:18px;
 color:var(--muted);
 max-width:700px;
-
 }
 
 .buttons{
-
 display:flex;
 gap:14px;
 margin-top:40px;
 flex-wrap:wrap;
-
 }
 
 .btn{
-
 padding:16px 32px;
 border-radius:16px;
 text-decoration:none;
 font-weight:700;
 transition:.3s;
-
 }
 
 .primary{
-
-background:
-linear-gradient(
+background:linear-gradient(
 90deg,
 var(--cyan),
 var(--violet)
 );
-
 color:white;
-
 }
 
 .secondary{
-
 background:rgba(255,255,255,.05);
 border:1px solid rgba(255,255,255,.08);
-
 backdrop-filter:blur(12px);
-
 color:white;
-
 }
 
 .btn:hover{
-
 transform:translateY(-4px);
-
 }
 
 .section{
-
 margin-top:120px;
-
 }
 
 .section-title{
-
 font-size:40px;
 font-weight:800;
 margin-bottom:30px;
-
 }
 
-.featured{
-
+.featured,
+.card{
 background:var(--card);
 border:1px solid var(--border);
-
 border-radius:32px;
 overflow:hidden;
-
 transition:.35s;
-
+cursor:pointer;
 }
 
-.featured:hover{
-
+.featured:hover,
+.card:hover{
 transform:translateY(-6px);
-
 box-shadow:
 0 0 40px rgba(0,229,255,.08),
 0 0 60px rgba(140,82,255,.08);
-
 }
 
 .thumb{
-
 position:relative;
 overflow:hidden;
-
 }
 
 .thumb img{
-
 width:100%;
 display:block;
 transition:.4s;
-
 }
 
-.featured:hover img{
-
+.featured:hover img,
+.card:hover img{
 transform:scale(1.03);
-
 }
 
 .play{
-
 position:absolute;
 inset:0;
-
 display:flex;
 align-items:center;
 justify-content:center;
-
 background:rgba(0,0,0,.15);
-
 }
 
 .play span{
-
 width:90px;
 height:90px;
-
 display:flex;
 align-items:center;
 justify-content:center;
-
 border-radius:50%;
-
 background:rgba(255,255,255,.15);
 backdrop-filter:blur(10px);
-
 font-size:36px;
-
 }
 
 .content{
-
 padding:30px;
-
 }
 
 .project-title{
-
 font-size:34px;
 font-weight:800;
-
 }
 
 .project-type{
-
 margin-top:10px;
 color:var(--muted);
-
 }
 
 .watch{
-
 display:inline-block;
 margin-top:20px;
-
 color:var(--cyan);
 text-decoration:none;
 font-weight:700;
-
 }
 
 .watch:hover{
-
 color:white;
-
 }
 
 .grid{
-
 display:grid;
 grid-template-columns:repeat(2,1fr);
 gap:28px;
-
-}
-
-.card{
-
-background:var(--card);
-border:1px solid var(--border);
-
-border-radius:28px;
-overflow:hidden;
-
-transition:.35s;
-
-}
-
-.card:hover{
-
-transform:translateY(-6px);
-
-box-shadow:
-0 0 40px rgba(0,229,255,.08),
-0 0 60px rgba(140,82,255,.08);
-
-}
-
-.card:hover img{
-
-transform:scale(1.03);
-
 }
 
 .card .content{
-
 padding:22px;
+}
 
+/* VIDEO MODAL */
+
+.modal{
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.92);
+backdrop-filter:blur(12px);
+z-index:9999;
+padding:20px;
+}
+
+.modal-content{
+max-width:1100px;
+margin:30px auto;
+background:#111;
+border:1px solid #222;
+border-radius:28px;
+padding:20px;
+}
+
+.close{
+width:50px;
+height:50px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:50%;
+background:#1f1f1f;
+cursor:pointer;
+margin-left:auto;
+font-size:28px;
+}
+
+.video-wrapper{
+position:relative;
+padding-bottom:56.25%;
+height:0;
+overflow:hidden;
+border-radius:20px;
+margin-top:20px;
+}
+
+.video-wrapper iframe{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+border:none;
 }
 
 .footer{
-
 text-align:center;
 padding:120px 0 40px;
-
 }
 
 .footer h2{
-
 font-size:48px;
 font-weight:800;
-
 }
 
 .footer p{
-
 margin-top:15px;
 color:var(--muted);
-
 }
 
 @media(max-width:768px){
@@ -384,10 +332,7 @@ font-size:24px;
 
 <section class="hero">
 
-<img
-src="nova-logo.png"
-class="logo"
-alt="Nova Logo">
+<img src="nova-logo.png" class="logo" alt="Nova Logo">
 
 <h1 class="hero-title">
 Video Editor
@@ -401,16 +346,11 @@ Podcasts • Entertainment • YouTube • Shorts
 
 <div class="buttons">
 
-<a
-href="mailto:jsutreja@gmail.com"
-class="btn primary">
+<a href="mailto:jsutreja@gmail.com" class="btn primary">
 Contact
 </a>
 
-<a
-href="https://wa.me/919998544660"
-target="_blank"
-class="btn secondary">
+<a href="https://wa.me/919998544660" target="_blank" class="btn secondary">
 WhatsApp
 </a>
 
@@ -423,7 +363,10 @@ WhatsApp
 <h2 class="section-title">
 Featured Project
 </h2>
-<div class="featured">
+```
+```html
+<div class="featured"
+onclick="openVideo('aRLhpHu6KCI','What Is Self-Compassion?')">
 
 <div class="thumb">
 
@@ -447,12 +390,9 @@ What Is Self-Compassion?
 Podcast Editing
 </div>
 
-<a
-href="https://youtu.be/aRLhpHu6KCI"
-target="_blank"
-class="watch">
-Watch Project →
-</a>
+<div class="watch">
+Play Video →
+</div>
 
 </div>
 
@@ -468,15 +408,13 @@ Selected Work
 
 <div class="grid">
 
-<!-- CARD 1 -->
-
-<div class="card">
+<div class="card"
+onclick="openVideo('CdgVcAEEMC4','Do Millennials Know 2000s Songs?!')">
 
 <div class="thumb">
 
 <img
-src="https://img.youtube.com/vi/CdgVcAEEMC4/maxresdefault.jpg"
-alt="Do Millennials Know 2000s Songs">
+src="https://img.youtube.com/vi/CdgVcAEEMC4/maxresdefault.jpg">
 
 <div class="play">
 <span>▶</span>
@@ -494,26 +432,21 @@ Do Millennials Know 2000s Songs?!
 Entertainment
 </div>
 
-<a
-href="https://youtu.be/CdgVcAEEMC4"
-target="_blank"
-class="watch">
-Watch Project →
-</a>
+<div class="watch">
+Play Video →
+</div>
 
 </div>
 
 </div>
 
-<!-- CARD 2 -->
-
-<div class="card">
+<div class="card"
+onclick="openVideo('wAxAAnMFlMc','100 Years Of Snacks')">
 
 <div class="thumb">
 
 <img
-src="https://img.youtube.com/vi/wAxAAnMFlMc/maxresdefault.jpg"
-alt="100 Years Of Snacks">
+src="https://img.youtube.com/vi/wAxAAnMFlMc/maxresdefault.jpg">
 
 <div class="play">
 <span>▶</span>
@@ -531,26 +464,21 @@ alt="100 Years Of Snacks">
 Entertainment
 </div>
 
-<a
-href="https://youtu.be/wAxAAnMFlMc"
-target="_blank"
-class="watch">
-Watch Project →
-</a>
+<div class="watch">
+Play Video →
+</div>
 
 </div>
 
 </div>
 
-<!-- CARD 3 -->
-
-<div class="card">
+<div class="card"
+onclick="openVideo('hCi0mgS7ZEc','Top 3 Testosterone Exercises')">
 
 <div class="thumb">
 
 <img
-src="https://img.youtube.com/vi/hCi0mgS7ZEc/hqdefault.jpg"
-alt="Top 3 Testosterone Exercises">
+src="https://img.youtube.com/vi/hCi0mgS7ZEc/hqdefault.jpg">
 
 <div class="play">
 <span>▶</span>
@@ -568,26 +496,21 @@ Top 3 Testosterone Exercises
 Educational Content
 </div>
 
-<a
-href="https://youtu.be/hCi0mgS7ZEc"
-target="_blank"
-class="watch">
-Watch Project →
-</a>
+<div class="watch">
+Play Video →
+</div>
 
 </div>
 
 </div>
 
-<!-- CARD 4 -->
-
-<div class="card">
+<div class="card"
+onclick="openVideo('bdrkjMIhrDs','Little Five Points')">
 
 <div class="thumb">
 
 <img
-src="https://img.youtube.com/vi/bdrkjMIhrDs/maxresdefault.jpg"
-alt="Little Five Points">
+src="https://img.youtube.com/vi/bdrkjMIhrDs/maxresdefault.jpg">
 
 <div class="play">
 <span>▶</span>
@@ -605,12 +528,9 @@ Little Five Points
 Storytelling
 </div>
 
-<a
-href="https://youtu.be/bdrkjMIhrDs"
-target="_blank"
-class="watch">
-Watch Project →
-</a>
+<div class="watch">
+Play Video →
+</div>
 
 </div>
 
@@ -652,5 +572,82 @@ WhatsApp
 
 </div>
 
+<!-- VIDEO MODAL -->
+
+<div class="modal" id="videoModal">
+
+<div class="modal-content">
+
+<div
+class="close"
+onclick="closeVideo()">
+✕
+</div>
+
+<div class="video-wrapper">
+
+<iframe
+id="videoFrame"
+allowfullscreen
+allow="autoplay; encrypted-media">
+</iframe>
+
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+function openVideo(videoId){
+
+document.getElementById('videoModal').style.display='block';
+
+document.getElementById('videoFrame').src =
+'https://www.youtube.com/embed/' +
+videoId +
+'?autoplay=1&rel=0';
+
+document.body.style.overflow='hidden';
+
+}
+
+function closeVideo(){
+
+document.getElementById('videoModal').style.display='none';
+
+document.getElementById('videoFrame').src='';
+
+document.body.style.overflow='auto';
+
+}
+
+window.onclick=function(event){
+
+const modal =
+document.getElementById('videoModal');
+
+if(event.target===modal){
+
+closeVideo();
+
+}
+
+}
+
+document.addEventListener('keydown',function(e){
+
+if(e.key==='Escape'){
+
+closeVideo();
+
+}
+
+});
+
+</script>
+
 </body>
 </html>
+```
