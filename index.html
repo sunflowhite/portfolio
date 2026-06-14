@@ -3,346 +3,362 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NOVA | Video Editor</title>
+<title>NOVA</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 
-:root{
-  --bg:#090909;
-  --card:#141414;
-  --border:#262626;
-  --text:#ffffff;
-  --muted:#9ca3af;
-
-  --orange:#F58529;
-  --pink:#DD2A7B;
-  --purple:#8134AF;
-  --blue:#515BD4;
-}
-
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-
-html{
-  scroll-behavior:smooth;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Inter,sans-serif;
 }
 
 body{
-  background:var(--bg);
-  color:var(--text);
-  font-family:'Inter',sans-serif;
+background:#000;
+color:white;
 }
 
-nav{
-  position:sticky;
-  top:0;
-  z-index:100;
-  backdrop-filter:blur(20px);
-  background:rgba(9,9,9,.8);
-  border-bottom:1px solid var(--border);
+.container{
+max-width:420px;
+margin:auto;
+padding-bottom:80px;
 }
 
-.nav-container{
-  max-width:1400px;
-  margin:auto;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:20px;
+.topbar{
+height:60px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 16px;
+border-bottom:1px solid #262626;
+position:sticky;
+top:0;
+background:#000;
+z-index:100;
+}
+
+.topbar h1{
+font-size:20px;
+}
+
+.profile{
+padding:24px 16px;
+}
+
+.profile-top{
+display:flex;
+gap:24px;
+align-items:center;
 }
 
 .logo{
-  font-size:1.5rem;
-  font-weight:800;
-  background:linear-gradient(
-    90deg,
-    var(--orange),
-    var(--pink),
-    var(--purple),
-    var(--blue)
-  );
-  -webkit-background-clip:text;
-  color:transparent;
-}
-
-.nav-links{
-  display:flex;
-  gap:30px;
-}
-
-.nav-links a{
-  color:white;
-  text-decoration:none;
-}
-
-.hero{
-  min-height:80vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  padding:40px;
-}
-
-.hero-content{
-  max-width:900px;
-}
-
-.hero h1{
-  font-size:clamp(4rem,10vw,8rem);
-  font-weight:800;
-  background:linear-gradient(
-    90deg,
-    var(--orange),
-    var(--pink),
-    var(--purple),
-    var(--blue)
-  );
-  -webkit-background-clip:text;
-  color:transparent;
-}
-
-.hero p{
-  margin-top:20px;
-  color:var(--muted);
-  font-size:1.2rem;
+width:90px;
+height:90px;
+border-radius:50%;
+background:linear-gradient(
+45deg,
+#F58529,
+#DD2A7B,
+#8134AF,
+#515BD4
+);
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:36px;
+font-weight:700;
 }
 
 .stats{
-  margin-top:40px;
-  display:flex;
-  justify-content:center;
-  gap:50px;
-  flex-wrap:wrap;
+display:flex;
+gap:28px;
 }
 
-.stat h2{
-  font-size:2rem;
+.stat{
+text-align:center;
 }
 
-.stat p{
-  color:var(--muted);
+.stat strong{
+display:block;
+font-size:18px;
 }
 
-.section{
-  max-width:1400px;
-  margin:auto;
-  padding:80px 20px;
+.bio{
+margin-top:16px;
 }
 
-.section-title{
-  font-size:2rem;
-  margin-bottom:30px;
+.bio h2{
+font-size:16px;
 }
 
-.video-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(450px,1fr));
-  gap:30px;
+.bio p{
+color:#aaa;
+margin-top:4px;
 }
 
-.video-card{
-  background:var(--card);
-  border:1px solid var(--border);
-  border-radius:24px;
-  overflow:hidden;
-  transition:.3s;
-}
-
-.video-card:hover{
-  transform:translateY(-6px);
-}
-
-.video-card iframe{
-  width:100%;
-  aspect-ratio:16/9;
-  border:none;
-}
-
-.video-info{
-  padding:20px;
-}
-
-.video-info h3{
-  margin-bottom:8px;
-}
-
-.video-info p{
-  color:var(--muted);
-}
-
-.contact{
-  text-align:center;
-  padding:120px 20px;
-}
-
-.contact h2{
-  font-size:3rem;
-}
-
-.contact p{
-  margin-top:20px;
-  color:var(--muted);
+.buttons{
+display:flex;
+gap:8px;
+margin-top:16px;
 }
 
 .btn{
-  display:inline-block;
-  margin-top:30px;
-  padding:16px 32px;
-  border-radius:999px;
-  text-decoration:none;
-  color:white;
-  background:linear-gradient(
-    90deg,
-    var(--orange),
-    var(--pink),
-    var(--purple),
-    var(--blue)
-  );
+flex:1;
+padding:10px;
+border:none;
+border-radius:8px;
+background:#262626;
+color:white;
+font-weight:600;
 }
 
-footer{
-  border-top:1px solid var(--border);
-  padding:30px;
-  text-align:center;
-  color:var(--muted);
+.highlights{
+display:flex;
+overflow-x:auto;
+gap:16px;
+padding:16px;
+border-top:1px solid #262626;
+border-bottom:1px solid #262626;
 }
 
-@media(max-width:768px){
-
-.video-grid{
-grid-template-columns:1fr;
+.highlight{
+min-width:70px;
+text-align:center;
 }
 
-.hero h1{
-font-size:4rem;
+.highlight-circle{
+width:64px;
+height:64px;
+border-radius:50%;
+border:2px solid #444;
+margin:auto;
 }
 
+.highlight p{
+font-size:12px;
+margin-top:6px;
+}
+
+.tabs{
+display:flex;
+}
+
+.tab{
+flex:1;
+text-align:center;
+padding:14px;
+border-bottom:1px solid #262626;
+}
+
+.grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:2px;
+background:#262626;
+}
+
+.post{
+aspect-ratio:1;
+background:#111;
+overflow:hidden;
+cursor:pointer;
+}
+
+.post iframe{
+width:100%;
+height:100%;
+border:none;
+pointer-events:none;
+}
+
+.modal{
+display:none;
+position:fixed;
+inset:0;
+background:#000;
+z-index:999;
+overflow:auto;
+}
+
+.modal-content{
+padding:20px;
+}
+
+.close{
+font-size:32px;
+cursor:pointer;
+margin-bottom:20px;
+}
+
+.video-wrapper{
+position:relative;
+padding-bottom:56.25%;
+height:0;
+overflow:hidden;
+border-radius:12px;
+}
+
+.video-wrapper iframe{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+}
+
+.title{
+margin-top:16px;
+font-size:20px;
+font-weight:700;
+}
+
+.category{
+color:#aaa;
+margin-top:8px;
 }
 
 </style>
 </head>
-
 <body>
 
-<nav>
-  <div class="nav-container">
-    <div class="logo">NOVA</div>
+<div class="container">
 
-    <div class="nav-links">
-      <a href="#work">Work</a>
-      <a href="#contact">Contact</a>
-    </div>
-  </div>
-</nav>
-
-<section class="hero">
-
-  <div class="hero-content">
-
-    <h1>NOVA</h1>
-
-    <p>
-      Video Editor & Content Studio
-    </p>
-
-    <div class="stats">
-
-      <div class="stat">
-        <h2>250+</h2>
-        <p>Videos Edited</p>
-      </div>
-
-      <div class="stat">
-        <h2>50+</h2>
-        <p>Clients</p>
-      </div>
-
-      <div class="stat">
-        <h2>100M+</h2>
-        <p>Views</p>
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-<section class="section" id="work">
-
-<h2 class="section-title">Featured Work</h2>
-
-<div class="video-grid">
-
-<div class="video-card">
-<iframe src="https://www.youtube.com/embed/aRLhpHu6KCI"></iframe>
-<div class="video-info">
-<h3>What Is Self-Compassion?</h3>
-<p>Podcast Editing</p>
-</div>
+<div class="topbar">
+<h1>NOVA</h1>
+<div>☰</div>
 </div>
 
-<div class="video-card">
-<iframe src="https://www.youtube.com/embed/CdgVcAEEMC4"></iframe>
-<div class="video-info">
-<h3>Do Millennials Know 2000s Songs?!</h3>
-<p>Entertainment Content</p>
-</div>
+<div class="profile">
+
+<div class="profile-top">
+
+<div class="logo">N</div>
+
+<div class="stats">
+
+<div class="stat">
+<strong>250+</strong>
+<span>Videos</span>
 </div>
 
-<div class="video-card">
-<iframe src="https://www.youtube.com/embed/wAxAAnMFlMc"></iframe>
-<div class="video-info">
-<h3>100 Years Of Snacks</h3>
-<p>Entertainment Editing</p>
-</div>
+<div class="stat">
+<strong>50+</strong>
+<span>Clients</span>
 </div>
 
-<div class="video-card">
-<iframe src="https://www.youtube.com/embed/hCi0mgS7ZEc"></iframe>
-<div class="video-info">
-<h3>Top 3 Testosterone Exercises</h3>
-<p>Educational Content</p>
-</div>
-</div>
-
-<div class="video-card">
-<iframe src="https://www.youtube.com/embed/bdrkjMIhrDs"></iframe>
-<div class="video-info">
-<h3>Little Five Points</h3>
-<p>Storytelling & Documentary</p>
-</div>
+<div class="stat">
+<strong>100M+</strong>
+<span>Views</span>
 </div>
 
 </div>
 
-</section>
+</div>
 
-<section class="contact" id="contact">
+<div class="bio">
+<h2>Nova</h2>
+<p>Video Editor & Content Studio</p>
+<p>Podcasts • Entertainment • Ads • Shorts</p>
+</div>
 
-<h2>Let's Work Together</h2>
+<div class="buttons">
+<button class="btn">Contact</button>
+<button class="btn">WhatsApp</button>
+</div>
 
-<p>
-Need podcast editing, short-form content,
-YouTube videos or ads?
-</p>
+</div>
 
-<a href="mailto:your@email.com" class="btn">
-Contact Nova
-</a>
+<div class="highlights">
 
-</section>
+<div class="highlight">
+<div class="highlight-circle"></div>
+<p>Podcasts</p>
+</div>
 
-<footer>
-© 2026 NOVA • Video Editor & Content Studio
-</footer>
+<div class="highlight">
+<div class="highlight-circle"></div>
+<p>Ads</p>
+</div>
+
+<div class="highlight">
+<div class="highlight-circle"></div>
+<p>Reels</p>
+</div>
+
+<div class="highlight">
+<div class="highlight-circle"></div>
+<p>Shorts</p>
+</div>
+
+</div>
+
+<div class="tabs">
+<div class="tab">Posts</div>
+<div class="tab">Reels</div>
+</div>
+
+<div class="grid">
+
+<div class="post" onclick="openVideo('aRLhpHu6KCI','What Is Self-Compassion?','Podcast Editing')"></div>
+
+<div class="post" onclick="openVideo('CdgVcAEEMC4','Do Millennials Know 2000s Songs?!','Entertainment')"></div>
+
+<div class="post" onclick="openVideo('wAxAAnMFlMc','100 Years Of Snacks','Entertainment')"></div>
+
+<div class="post" onclick="openVideo('hCi0mgS7ZEc','Top 3 Testosterone Exercises','Educational')"></div>
+
+<div class="post" onclick="openVideo('bdrkjMIhrDs','Little Five Points','Storytelling')"></div>
+
+<div class="post"></div>
+
+</div>
+
+</div>
+
+<div class="modal" id="modal">
+
+<div class="modal-content">
+
+<div class="close" onclick="closeVideo()">×</div>
+
+<div class="video-wrapper">
+<iframe id="videoFrame" allowfullscreen></iframe>
+</div>
+
+<div class="title" id="videoTitle"></div>
+<div class="category" id="videoCategory"></div>
+
+</div>
+
+</div>
+
+<script>
+
+function openVideo(id,title,category){
+
+document.getElementById('modal').style.display='block';
+
+document.getElementById('videoFrame').src=
+'https://www.youtube.com/embed/'+id+'?autoplay=1';
+
+document.getElementById('videoTitle').innerText=title;
+
+document.getElementById('videoCategory').innerText=category;
+
+}
+
+function closeVideo(){
+
+document.getElementById('modal').style.display='none';
+
+document.getElementById('videoFrame').src='';
+
+}
+
+</script>
 
 </body>
 </html>
