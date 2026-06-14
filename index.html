@@ -1,113 +1,474 @@
-from pathlib import Path
-
-html = r"""<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NOVA Portfolio</title>
+
+<title>NOVA | Video Editor</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Inter,sans-serif}
-body{background:#000;color:#fff}
-.header{padding:30px 20px;text-align:center}
-.logo{width:140px;height:140px;object-fit:contain;display:block;margin:0 auto 10px}
-h1{font-size:42px;letter-spacing:8px}
-.tag{color:#aaa;margin-top:8px}
-.stats{display:flex;justify-content:center;gap:30px;margin:25px 0}
-.stat{text-align:center}
-.stat b{display:block;font-size:22px}
-.buttons{display:flex;gap:10px;justify-content:center;padding:0 20px}
-.btn{background:#1f1f1f;color:#fff;text-decoration:none;padding:12px 18px;border-radius:12px}
-.feed{max-width:900px;margin:30px auto;padding:0 16px}
-.card{margin-bottom:28px;cursor:pointer}
-.thumb{position:relative;border-radius:20px;overflow:hidden;border:1px solid #222}
-.thumb img{width:100%;display:block;transition:.4s}
-.thumb:hover img{transform:scale(1.05)}
-.play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:54px;background:rgba(0,0,0,.25)}
-.title{font-size:20px;font-weight:700;margin-top:10px}
-.cat{color:#aaa;margin-top:4px}
-.modal{display:none;position:fixed;inset:0;background:#000;z-index:999;padding:20px;overflow:auto}
-.close{font-size:36px;cursor:pointer}
-.video{position:relative;padding-bottom:56.25%;height:0;margin-top:20px}
-.video iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Inter',sans-serif;
+}
+
+:root{
+--bg:#000000;
+--card:#111111;
+--border:#262626;
+--text:#ffffff;
+--muted:#a1a1aa;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+background:var(--bg);
+color:var(--text);
+}
+
+.container{
+max-width:900px;
+margin:auto;
+padding:40px 20px 80px;
+}
+
+.hero{
+text-align:center;
+margin-bottom:60px;
+}
+
+.logo{
+width:220px;
+height:auto;
+display:block;
+margin:auto;
+filter:drop-shadow(0 0 25px rgba(122,92,255,.25));
+}
+
+.stats{
+display:flex;
+justify-content:center;
+gap:40px;
+margin-top:30px;
+flex-wrap:wrap;
+}
+
+.stat{
+text-align:center;
+}
+
+.stat strong{
+display:block;
+font-size:32px;
+font-weight:800;
+}
+
+.stat span{
+font-size:14px;
+color:var(--muted);
+}
+
+.buttons{
+display:flex;
+justify-content:center;
+gap:12px;
+margin-top:30px;
+flex-wrap:wrap;
+}
+
+.btn{
+background:#1f1f1f;
+border:1px solid #333;
+color:white;
+padding:14px 24px;
+border-radius:12px;
+text-decoration:none;
+font-weight:600;
+transition:.3s;
+}
+
+.btn:hover{
+transform:translateY(-2px);
+background:#2a2a2a;
+}
+
+.section-title{
+font-size:30px;
+font-weight:800;
+margin-bottom:25px;
+}
+
+.feed{
+display:flex;
+flex-direction:column;
+gap:28px;
+}
+
+.card{
+cursor:pointer;
+}
+
+.thumbnail{
+position:relative;
+overflow:hidden;
+border-radius:22px;
+border:1px solid var(--border);
+background:var(--card);
+}
+
+.thumbnail img{
+width:100%;
+display:block;
+transition:.4s;
+}
+
+.card:hover .thumbnail img{
+transform:scale(1.04);
+}
+
+.overlay{
+position:absolute;
+inset:0;
+background:rgba(0,0,0,.25);
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.play{
+width:72px;
+height:72px;
+border-radius:50%;
+background:rgba(255,255,255,.18);
+backdrop-filter:blur(12px);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:28px;
+}
+
+.video-title{
+font-size:22px;
+font-weight:700;
+margin-top:12px;
+}
+
+.video-category{
+font-size:14px;
+color:var(--muted);
+margin-top:4px;
+}
+
+.modal{
+display:none;
+position:fixed;
+inset:0;
+background:#000;
+z-index:999;
+padding:20px;
+overflow:auto;
+}
+
+.close{
+font-size:40px;
+cursor:pointer;
+}
+
+.modal-title{
+font-size:28px;
+font-weight:800;
+margin-top:20px;
+margin-bottom:20px;
+}
+
+.video-wrapper{
+position:relative;
+padding-bottom:56.25%;
+height:0;
+overflow:hidden;
+border-radius:16px;
+}
+
+.video-wrapper iframe{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+border:none;
+}
+
+@media(max-width:768px){
+
+.logo{
+width:170px;
+}
+
+.stat strong{
+font-size:24px;
+}
+
+.video-title{
+font-size:18px;
+}
+
+}
+
 </style>
 </head>
+
 <body>
 
-<div class="header">
+<div class="container">
+
+<div class="hero">
+
 <img src="nova-logo.png" class="logo" alt="Nova Logo">
-<h1>NOVA</h1>
-<div class="tag">EDIT • CREATE • ELEVATE</div>
 
 <div class="stats">
-<div class="stat"><b>250+</b>Videos</div>
-<div class="stat"><b>50+</b>Clients</div>
-<div class="stat"><b>100M+</b>Views</div>
+
+<div class="stat">
+<strong>250+</strong>
+<span>Videos Edited</span>
+</div>
+
+<div class="stat">
+<strong>50+</strong>
+<span>Clients</span>
+</div>
+
+<div class="stat">
+<strong>100M+</strong>
+<span>Views</span>
+</div>
+
 </div>
 
 <div class="buttons">
-<a class="btn" href="mailto:jsutreja@gmail.com">Contact</a>
-<a class="btn" target="_blank" href="https://wa.me/919998544660">WhatsApp</a>
+
+<a href="mailto:jsutreja@gmail.com" class="btn">
+Contact
+</a>
+
+<a href="https://wa.me/919998544660" target="_blank" class="btn">
+WhatsApp
+</a>
+
 </div>
+
 </div>
+
+<h2 class="section-title">
+Featured Work
+</h2>
 
 <div class="feed">
+  <!-- VIDEO 1 -->
 
-<div class="card" onclick="openVideo('aRLhpHu6KCI','What Is Self-Compassion?')">
-<div class="thumb"><img src="https://img.youtube.com/vi/aRLhpHu6KCI/maxresdefault.jpg"><div class="play">▶</div></div>
-<div class="title">What Is Self-Compassion?</div>
-<div class="cat">Podcast Editing</div>
-</div>
+<div class="card"
+onclick="openVideo('aRLhpHu6KCI','What Is Self-Compassion?')">
 
-<div class="card" onclick="openVideo('CdgVcAEEMC4','Do Millennials Know 2000s Songs?!')">
-<div class="thumb"><img src="https://img.youtube.com/vi/CdgVcAEEMC4/maxresdefault.jpg"><div class="play">▶</div></div>
-<div class="title">Do Millennials Know 2000s Songs?!</div>
-<div class="cat">Entertainment</div>
-</div>
+<div class="thumbnail">
 
-<div class="card" onclick="openVideo('wAxAAnMFlMc','100 Years Of Snacks')">
-<div class="thumb"><img src="https://img.youtube.com/vi/wAxAAnMFlMc/maxresdefault.jpg"><div class="play">▶</div></div>
-<div class="title">100 Years Of Snacks</div>
-<div class="cat">Entertainment</div>
-</div>
+<img
+src="https://img.youtube.com/vi/aRLhpHu6KCI/maxresdefault.jpg"
+alt="What Is Self Compassion">
 
-<div class="card" onclick="openVideo('hCi0mgS7ZEc','Top 3 Testosterone Exercises')">
-<div class="thumb"><img src="https://img.youtube.com/vi/hCi0mgS7ZEc/maxresdefault.jpg"><div class="play">▶</div></div>
-<div class="title">Top 3 Testosterone Exercises</div>
-<div class="cat">Educational</div>
-</div>
-
-<div class="card" onclick="openVideo('bdrkjMIhrDs','Little Five Points')">
-<div class="thumb"><img src="https://img.youtube.com/vi/bdrkjMIhrDs/maxresdefault.jpg"><div class="play">▶</div></div>
-<div class="title">Little Five Points</div>
-<div class="cat">Storytelling</div>
+<div class="overlay">
+<div class="play">▶</div>
 </div>
 
 </div>
+
+<div class="video-title">
+What Is Self-Compassion?
+</div>
+
+<div class="video-category">
+Podcast Editing
+</div>
+
+</div>
+
+<!-- VIDEO 2 -->
+
+<div class="card"
+onclick="openVideo('CdgVcAEEMC4','Do Millennials Know 2000s Songs?!')">
+
+<div class="thumbnail">
+
+<img
+src="https://img.youtube.com/vi/CdgVcAEEMC4/maxresdefault.jpg"
+alt="Do Millennials Know 2000s Songs">
+
+<div class="overlay">
+<div class="play">▶</div>
+</div>
+
+</div>
+
+<div class="video-title">
+Do Millennials Know 2000s Songs?!
+</div>
+
+<div class="video-category">
+Entertainment
+</div>
+
+</div>
+
+<!-- VIDEO 3 -->
+
+<div class="card"
+onclick="openVideo('wAxAAnMFlMc','100 Years Of Snacks')">
+
+<div class="thumbnail">
+
+<img
+src="https://img.youtube.com/vi/wAxAAnMFlMc/maxresdefault.jpg"
+alt="100 Years Of Snacks">
+
+<div class="overlay">
+<div class="play">▶</div>
+</div>
+
+</div>
+
+<div class="video-title">
+100 Years Of Snacks
+</div>
+
+<div class="video-category">
+Entertainment
+</div>
+
+</div>
+
+<!-- VIDEO 4 -->
+
+<div class="card"
+onclick="openVideo('hCi0mgS7ZEc','Top 3 Testosterone Exercises')">
+
+<div class="thumbnail">
+
+<img
+src="https://img.youtube.com/vi/hCi0mgS7ZEc/hqdefault.jpg"
+alt="Top Testosterone Exercises">
+
+<div class="overlay">
+<div class="play">▶</div>
+</div>
+
+</div>
+
+<div class="video-title">
+Top 3 Testosterone Exercises
+</div>
+
+<div class="video-category">
+Educational Content
+</div>
+
+</div>
+
+<!-- VIDEO 5 -->
+
+<div class="card"
+onclick="openVideo('bdrkjMIhrDs','Little Five Points')">
+
+<div class="thumbnail">
+
+<img
+src="https://img.youtube.com/vi/bdrkjMIhrDs/maxresdefault.jpg"
+alt="Little Five Points">
+
+<div class="overlay">
+<div class="play">▶</div>
+</div>
+
+</div>
+
+<div class="video-title">
+Little Five Points
+</div>
+
+<div class="video-category">
+Storytelling
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- VIDEO MODAL -->
 
 <div class="modal" id="modal">
-<div class="close" onclick="closeVideo()">×</div>
-<h2 id="videoTitle"></h2>
-<div class="video">
-<iframe id="frame" allowfullscreen></iframe>
+
+<div class="close"
+onclick="closeVideo()">
+×
 </div>
+
+<div class="modal-title"
+id="videoTitle">
+</div>
+
+<div class="video-wrapper">
+
+<iframe
+id="videoFrame"
+allowfullscreen>
+</iframe>
+
+</div>
+
 </div>
 
 <script>
+
 function openVideo(id,title){
+
 document.getElementById('modal').style.display='block';
+
 document.getElementById('videoTitle').innerText=title;
-document.getElementById('frame').src='https://www.youtube.com/embed/'+id+'?autoplay=1';
+
+document.getElementById('videoFrame').src=
+'https://www.youtube.com/embed/' + id + '?autoplay=1';
+
 }
+
 function closeVideo(){
+
 document.getElementById('modal').style.display='none';
-document.getElementById('frame').src='';
+
+document.getElementById('videoFrame').src='';
+
 }
+
+window.onclick = function(event){
+
+const modal =
+document.getElementById('modal');
+
+if(event.target === modal){
+
+closeVideo();
+
+}
+
+}
+
 </script>
 
 </body>
-</html>"""
-path = "/mnt/data/index.html"
-Path(path).write_text(html, encoding="utf-8")
-print(path)
+</html>
