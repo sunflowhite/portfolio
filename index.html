@@ -3,80 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Video Editor Portfolio</title>
+    <title>Visuals by [Your Name] | Video Editor Portfolio</title>
     <style>
+        :root {
+            --bg-color: #08090c;
+            --card-bg: #111319;
+            --accent-color: #6366f1;
+            --accent-glow: rgba(99, 102, 241, 0.15);
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+        }
+
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background-color: #0d0e12; color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; padding: 40px 20px; }
-        .container { max-width: 1000px; margin: 0 auto; }
+        body { 
+            background-color: var(--bg-color); 
+            color: var(--text-main); 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+            padding: 60px 24px;
+            line-height: 1.5;
+        }
+        .container { max-width: 1100px; margin: 0 auto; }
         
-        /* Header Section */
-        header { text-align: center; margin-bottom: 60px; }
-        h1 { font-size: 2.5rem; margin-bottom: 15px; letter-spacing: -0.5px; }
-        p.subtitle { color: #8a8f98; font-size: 1.1rem; max-width: 600px; margin: 0 auto; line-height: 1.6; }
+        /* Premium Header Design */
+        header { 
+            text-align: left; 
+            margin-bottom: 80px; 
+            border-left: 3px solid var(--accent-color);
+            padding-left: 24px;
+        }
+        .tag {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-color);
+            font-weight: 700;
+            margin-bottom: 8px;
+            display: inline-block;
+        }
+        h1 { font-size: 3rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 16px; }
+        p.subtitle { color: var(--text-muted); font-size: 1.2rem; max-width: 700px; line-height: 1.7; }
         
-        /* Video Grid */
-        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 30px; margin-bottom: 60px; }
-        @media(max-width: 500px) { .portfolio-grid { grid-template-columns: 1fr; } }
-        .card { background: #161920; border: 1px solid #222630; border-radius: 12px; overflow: hidden; transition: transform 0.2s; }
-        .card:hover { transform: translateY(-4px); }
-        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; }
+        /* Modern Video Workspace Grid */
+        .portfolio-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(480px, 1fr)); 
+            gap: 40px; 
+            margin-bottom: 80px; 
+        }
+        @media(max-width: 600px) { .portfolio-grid { grid-template-columns: 1fr; } }
+        
+        .card { 
+            background: var(--card-bg); 
+            border: 1px solid #1f232e; 
+            border-radius: 16px; 
+            overflow: hidden; 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+        }
+        .card:hover { 
+            transform: translateY(-6px); 
+            border-color: var(--accent-color);
+            box-shadow: 0 12px 40px var(--accent-glow);
+        }
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background: #000; }
         .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
-        .card-info { padding: 20px; }
-        .card-title { font-size: 1.2rem; margin-bottom: 8px; font-weight: 600; }
-        .card-desc { color: #8a8f98; font-size: 0.95rem; line-height: 1.4; }
         
-        /* CTA Section */
-        .cta { text-align: center; background: linear-gradient(135deg, #1e1b4b 0%, #311042 100%); padding: 40px; border-radius: 16px; border: 1px solid #3b2063; }
-        .cta h2 { margin-bottom: 10px; font-size: 1.8rem; }
-        .cta p { color: #c7adff; margin-bottom: 25px; }
-        .btn { display: inline-block; background: #ffffff; color: #000000; padding: 12px 30px; border-radius: 8px; font-weight: 600; text-decoration: none; transition: background 0.2s; }
-        .btn:hover { background: #e2e2e2; }
+        .card-info { padding: 24px; }
+        .card-title { font-size: 1.3rem; margin-bottom: 10px; font-weight: 700; letter-spacing: -0.3px; }
+        .card-desc { color: var(--text-muted); font-size: 1rem; line-height: 1.5; }
+        
+        /* Sleek Studio CTA Section */
+        .cta { 
+            background: linear-gradient(180deg, #111319 0%, #0c0d14 100%); 
+            padding: 60px 40px; 
+            border-radius: 24px; 
+            border: 1px solid #1f232e;
+            text-align: center;
+            position: relative;
+        }
+        .cta h2 { margin-bottom: 12px; font-size: 2rem; font-weight: 800; letter-spacing: -0.5px; }
+        .cta p { color: var(--text-muted); margin-bottom: 30px; font-size: 1.1rem; }
+        .btn { 
+            display: inline-block; 
+            background: var(--accent-color); 
+            color: #ffffff; 
+            padding: 14px 36px; 
+            border-radius: 10px; 
+            font-weight: 600; 
+            text-decoration: none; 
+            transition: all 0.2s; 
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.3);
+        }
+        .btn:hover { 
+            background: #4f46e5; 
+            transform: scale(1.02);
+            box-shadow: 0 6px 24px rgba(99, 102, 241, 0.4);
+        }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- Header -->
         <header>
-            <h1>Hi, I'm [Your Name]</h1>
-            <p class="subtitle">I craft high-retention social media cuts, YouTube video essays, and motion graphics using Premiere Pro & After Effects.</p>
+            <span class="tag">Post-Production Portfolio</span>
+            <h1>Visuals by [Your Name]</h1>
+            <p class="subtitle">High-retention social media cuts, immersive storytelling edits, and cinematic motion graphics engineered using Premiere Pro & After Effects.</p>
         </header>
 
-        <!-- Portfolio Grid -->
         <section class="portfolio-grid">
             
-            <!-- Video Item 1 -->
             <div class="card">
                 <div class="video-container">
-                    <!-- REPLACE THE LINK BELOW WITH YOUR YOUTUBE EMBED LINK -->
                     <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
                 </div>
                 <div class="card-info">
-                    <div class="card-title">🔥 Short-Form Retaining Edit</div>
-                    <div class="card-desc">Fast pacing, custom text layouts, and deep sound design designed to stop the scroll.</div>
+                    <div class="card-title">🔥 Short-Form Retention Edit</div>
+                    <div class="card-desc">Designed to stop the scroll. Features hyper-paced cuts, custom animated typography layouts, and tactical SFX layering.</div>
                 </div>
             </div>
 
-            <!-- Video Item 2 -->
             <div class="card">
                 <div class="video-container">
                     <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
                 </div>
                 <div class="card-info">
-                    <div class="card-title">🎬 YouTube Video Essay / Storytelling</div>
-                    <div class="card-desc">Focus on narrative pacing, color correction, and smooth B-roll integration.</div>
+                    <div class="card-title">🎬 Narrative Storytelling & Video Essay</div>
+                    <div class="card-desc">Focus on intentional pacing, structured pacing arches, professional color correction, and smooth multi-source asset tracking.</div>
                 </div>
             </div>
 
         </section>
 
-        <!-- Call To Action -->
         <section class="cta">
-            <h2>Let's work together</h2>
-            <p>Need polished, engaging videos for your brand or channel?</p>
-            <a href="mailto:your-email@gmail.com" class="btn">Get In Touch</a>
+            <h2>Let's build something epic</h2>
+            <p>Ready to level up your channel retention and visual delivery?</p>
+            <a href="mailto:your-email@gmail.com" class="btn">Start a Project</a>
         </section>
     </div>
 
 </body>
-</html> 
+</html>
