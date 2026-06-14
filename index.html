@@ -5,10 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NOVA</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-
 *{
 margin:0;
 padding:0;
@@ -18,13 +17,13 @@ font-family:Inter,sans-serif;
 
 body{
 background:#000;
-color:white;
+color:#fff;
 }
 
 .container{
-max-width:420px;
+max-width:430px;
 margin:auto;
-padding-bottom:80px;
+min-height:100vh;
 }
 
 .topbar{
@@ -40,41 +39,40 @@ background:#000;
 z-index:100;
 }
 
-.topbar h1{
-font-size:20px;
-}
-
 .profile{
 padding:24px 16px;
 }
 
 .profile-top{
 display:flex;
-gap:24px;
 align-items:center;
+gap:24px;
+}
+
+.profile-ring{
+width:96px;
+height:96px;
+padding:3px;
+border-radius:50%;
+background:linear-gradient(45deg,#F58529,#DD2A7B,#8134AF,#515BD4);
+display:flex;
+align-items:center;
+justify-content:center;
 }
 
 .logo{
 width:90px;
 height:90px;
 border-radius:50%;
-background:linear-gradient(
-45deg,
-#F58529,
-#DD2A7B,
-#8134AF,
-#515BD4
-);
-display:flex;
-justify-content:center;
-align-items:center;
-font-size:36px;
-font-weight:700;
+object-fit:cover;
+background:#000;
 }
 
 .stats{
 display:flex;
-gap:28px;
+gap:20px;
+flex:1;
+justify-content:space-around;
 }
 
 .stat{
@@ -86,15 +84,17 @@ display:block;
 font-size:18px;
 }
 
+.stat span{
+font-size:14px;
+color:#aaa;
+}
+
 .bio{
 margin-top:16px;
 }
 
-.bio h2{
-font-size:16px;
-}
-
 .bio p{
+font-size:14px;
 color:#aaa;
 margin-top:4px;
 }
@@ -108,25 +108,26 @@ margin-top:16px;
 .btn{
 flex:1;
 padding:10px;
-border:none;
 border-radius:8px;
 background:#262626;
 color:white;
+text-decoration:none;
+text-align:center;
 font-weight:600;
 }
 
 .highlights{
 display:flex;
-overflow-x:auto;
 gap:16px;
+overflow-x:auto;
 padding:16px;
 border-top:1px solid #262626;
 border-bottom:1px solid #262626;
 }
 
 .highlight{
-min-width:70px;
 text-align:center;
+min-width:70px;
 }
 
 .highlight-circle{
@@ -144,13 +145,14 @@ margin-top:6px;
 
 .tabs{
 display:flex;
+border-bottom:1px solid #262626;
 }
 
 .tab{
 flex:1;
 text-align:center;
 padding:14px;
-border-bottom:1px solid #262626;
+font-weight:600;
 }
 
 .grid{
@@ -161,17 +163,49 @@ background:#262626;
 }
 
 .post{
+position:relative;
 aspect-ratio:1;
-background:#111;
 overflow:hidden;
 cursor:pointer;
+background:#111;
 }
 
-.post iframe{
+.post img{
 width:100%;
 height:100%;
-border:none;
-pointer-events:none;
+object-fit:cover;
+transition:.4s;
+}
+
+.overlay{
+position:absolute;
+inset:0;
+background:rgba(0,0,0,.45);
+opacity:0;
+display:flex;
+align-items:center;
+justify-content:center;
+transition:.3s;
+}
+
+.post:hover .overlay{
+opacity:1;
+}
+
+.post:hover img{
+transform:scale(1.08);
+}
+
+.play{
+width:60px;
+height:60px;
+border-radius:50%;
+background:rgba(255,255,255,.2);
+backdrop-filter:blur(10px);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:24px;
 }
 
 .modal{
@@ -207,21 +241,22 @@ top:0;
 left:0;
 width:100%;
 height:100%;
+border:none;
 }
 
 .title{
 margin-top:16px;
-font-size:20px;
+font-size:22px;
 font-weight:700;
 }
 
 .category{
-color:#aaa;
 margin-top:8px;
+color:#aaa;
 }
-
 </style>
 </head>
+
 <body>
 
 <div class="container">
@@ -235,10 +270,11 @@ margin-top:8px;
 
 <div class="profile-top">
 
-<div class="logo">N</div>
+<div class="profile-ring">
+<img src="nova-logo.png" class="logo" alt="Nova Logo">
+</div>
 
 <div class="stats">
-
 <div class="stat">
 <strong>250+</strong>
 <span>Videos</span>
@@ -253,7 +289,6 @@ margin-top:8px;
 <strong>100M+</strong>
 <span>Views</span>
 </div>
-
 </div>
 
 </div>
@@ -265,63 +300,57 @@ margin-top:8px;
 </div>
 
 <div class="buttons">
-<button class="btn">Contact</button>
-<button class="btn">WhatsApp</button>
+<a href="mailto:jsutreja@gmail.com" class="btn">Contact</a>
+<a href="https://wa.me/919998544660" target="_blank" class="btn">WhatsApp</a>
 </div>
 
 </div>
 
 <div class="highlights">
-
-<div class="highlight">
-<div class="highlight-circle"></div>
-<p>Podcasts</p>
-</div>
-
-<div class="highlight">
-<div class="highlight-circle"></div>
-<p>Ads</p>
-</div>
-
-<div class="highlight">
-<div class="highlight-circle"></div>
-<p>Reels</p>
-</div>
-
-<div class="highlight">
-<div class="highlight-circle"></div>
-<p>Shorts</p>
-</div>
-
+<div class="highlight"><div class="highlight-circle"></div><p>Podcasts</p></div>
+<div class="highlight"><div class="highlight-circle"></div><p>Ads</p></div>
+<div class="highlight"><div class="highlight-circle"></div><p>Reels</p></div>
+<div class="highlight"><div class="highlight-circle"></div><p>Shorts</p></div>
 </div>
 
 <div class="tabs">
-<div class="tab">Posts</div>
-<div class="tab">Reels</div>
+<div class="tab">POSTS</div>
+<div class="tab">REELS</div>
 </div>
 
 <div class="grid">
 
-<div class="post" onclick="openVideo('aRLhpHu6KCI','What Is Self-Compassion?','Podcast Editing')"></div>
+<div class="post" onclick="openVideo('aRLhpHu6KCI','What Is Self-Compassion?','Podcast Editing')">
+<img src="https://img.youtube.com/vi/aRLhpHu6KCI/maxresdefault.jpg">
+<div class="overlay"><div class="play">▶</div></div>
+</div>
 
-<div class="post" onclick="openVideo('CdgVcAEEMC4','Do Millennials Know 2000s Songs?!','Entertainment')"></div>
+<div class="post" onclick="openVideo('CdgVcAEEMC4','Do Millennials Know 2000s Songs?!','Entertainment')">
+<img src="https://img.youtube.com/vi/CdgVcAEEMC4/maxresdefault.jpg">
+<div class="overlay"><div class="play">▶</div></div>
+</div>
 
-<div class="post" onclick="openVideo('wAxAAnMFlMc','100 Years Of Snacks','Entertainment')"></div>
+<div class="post" onclick="openVideo('wAxAAnMFlMc','100 Years Of Snacks','Entertainment')">
+<img src="https://img.youtube.com/vi/wAxAAnMFlMc/maxresdefault.jpg">
+<div class="overlay"><div class="play">▶</div></div>
+</div>
 
-<div class="post" onclick="openVideo('hCi0mgS7ZEc','Top 3 Testosterone Exercises','Educational')"></div>
+<div class="post" onclick="openVideo('hCi0mgS7ZEc','Top 3 Testosterone Exercises','Educational')">
+<img src="https://img.youtube.com/vi/hCi0mgS7ZEc/maxresdefault.jpg">
+<div class="overlay"><div class="play">▶</div></div>
+</div>
 
-<div class="post" onclick="openVideo('bdrkjMIhrDs','Little Five Points','Storytelling')"></div>
-
-<div class="post"></div>
+<div class="post" onclick="openVideo('bdrkjMIhrDs','Little Five Points','Storytelling')">
+<img src="https://img.youtube.com/vi/bdrkjMIhrDs/maxresdefault.jpg">
+<div class="overlay"><div class="play">▶</div></div>
+</div>
 
 </div>
 
 </div>
 
 <div class="modal" id="modal">
-
 <div class="modal-content">
-
 <div class="close" onclick="closeVideo()">×</div>
 
 <div class="video-wrapper">
@@ -332,32 +361,20 @@ margin-top:8px;
 <div class="category" id="videoCategory"></div>
 
 </div>
-
 </div>
 
 <script>
-
 function openVideo(id,title,category){
-
 document.getElementById('modal').style.display='block';
-
-document.getElementById('videoFrame').src=
-'https://www.youtube.com/embed/'+id+'?autoplay=1';
-
+document.getElementById('videoFrame').src='https://www.youtube.com/embed/'+id+'?autoplay=1';
 document.getElementById('videoTitle').innerText=title;
-
 document.getElementById('videoCategory').innerText=category;
-
 }
 
 function closeVideo(){
-
 document.getElementById('modal').style.display='none';
-
 document.getElementById('videoFrame').src='';
-
 }
-
 </script>
 
 </body>
