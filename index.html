@@ -1,653 +1,99 @@
-```html
-<!DOCTYPE html>
+from pathlib import Path
+
+html = r"""<!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>NOVA</title>
-
+<title>NOVA | Video Editor</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Inter,sans-serif;
-}
-
-:root{
---bg:#050505;
---card:#111111;
---border:#1f1f1f;
---text:#ffffff;
---muted:#9ca3af;
---cyan:#00E5FF;
---violet:#8C52FF;
-}
-
-html{
-scroll-behavior:smooth;
-}
-
-body{
-background:var(--bg);
-color:var(--text);
-overflow-x:hidden;
-}
-
-.container{
-max-width:1200px;
-margin:auto;
-padding:40px 20px 100px;
-}
-
-.hero{
-min-height:90vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-}
-
-.logo{
-width:380px;
-max-width:90%;
-display:block;
-filter:
-drop-shadow(0 0 25px rgba(0,229,255,.15))
-drop-shadow(0 0 40px rgba(140,82,255,.15));
-animation:floatLogo 6s ease-in-out infinite;
-}
-
-@keyframes floatLogo{
-0%{transform:translateY(0);}
-50%{transform:translateY(-12px);}
-100%{transform:translateY(0);}
-}
-
-.hero-title{
-font-size:72px;
-font-weight:800;
-line-height:1;
-margin-top:35px;
-background:linear-gradient(
-90deg,
-var(--cyan),
-var(--violet)
-);
--webkit-background-clip:text;
-color:transparent;
-}
-
-.hero-subtitle{
-font-size:22px;
-margin-top:18px;
-color:var(--muted);
-max-width:700px;
-}
-
-.buttons{
-display:flex;
-gap:14px;
-margin-top:40px;
-flex-wrap:wrap;
-}
-
-.btn{
-padding:16px 32px;
-border-radius:16px;
-text-decoration:none;
-font-weight:700;
-transition:.3s;
-}
-
-.primary{
-background:linear-gradient(
-90deg,
-var(--cyan),
-var(--violet)
-);
-color:white;
-}
-
-.secondary{
-background:rgba(255,255,255,.05);
-border:1px solid rgba(255,255,255,.08);
-backdrop-filter:blur(12px);
-color:white;
-}
-
-.btn:hover{
-transform:translateY(-4px);
-}
-
-.section{
-margin-top:120px;
-}
-
-.section-title{
-font-size:40px;
-font-weight:800;
-margin-bottom:30px;
-}
-
-.featured,
-.card{
-background:var(--card);
-border:1px solid var(--border);
-border-radius:32px;
-overflow:hidden;
-transition:.35s;
-cursor:pointer;
-}
-
-.featured:hover,
-.card:hover{
-transform:translateY(-6px);
-box-shadow:
-0 0 40px rgba(0,229,255,.08),
-0 0 60px rgba(140,82,255,.08);
-}
-
-.thumb{
-position:relative;
-overflow:hidden;
-}
-
-.thumb img{
-width:100%;
-display:block;
-transition:.4s;
-}
-
-.featured:hover img,
-.card:hover img{
-transform:scale(1.03);
-}
-
-.play{
-position:absolute;
-inset:0;
-display:flex;
-align-items:center;
-justify-content:center;
-background:rgba(0,0,0,.15);
-}
-
-.play span{
-width:90px;
-height:90px;
-display:flex;
-align-items:center;
-justify-content:center;
-border-radius:50%;
-background:rgba(255,255,255,.15);
-backdrop-filter:blur(10px);
-font-size:36px;
-}
-
-.content{
-padding:30px;
-}
-
-.project-title{
-font-size:34px;
-font-weight:800;
-}
-
-.project-type{
-margin-top:10px;
-color:var(--muted);
-}
-
-.watch{
-display:inline-block;
-margin-top:20px;
-color:var(--cyan);
-text-decoration:none;
-font-weight:700;
-}
-
-.watch:hover{
-color:white;
-}
-
-.grid{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:28px;
-}
-
-.card .content{
-padding:22px;
-}
-
-/* VIDEO MODAL */
-
-.modal{
-display:none;
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.92);
-backdrop-filter:blur(12px);
-z-index:9999;
-padding:20px;
-}
-
-.modal-content{
-max-width:1100px;
-margin:30px auto;
-background:#111;
-border:1px solid #222;
-border-radius:28px;
-padding:20px;
-}
-
-.close{
-width:50px;
-height:50px;
-display:flex;
-align-items:center;
-justify-content:center;
-border-radius:50%;
-background:#1f1f1f;
-cursor:pointer;
-margin-left:auto;
-font-size:28px;
-}
-
-.video-wrapper{
-position:relative;
-padding-bottom:56.25%;
-height:0;
-overflow:hidden;
-border-radius:20px;
-margin-top:20px;
-}
-
-.video-wrapper iframe{
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%;
-border:none;
-}
-
-.footer{
-text-align:center;
-padding:120px 0 40px;
-}
-
-.footer h2{
-font-size:48px;
-font-weight:800;
-}
-
-.footer p{
-margin-top:15px;
-color:var(--muted);
-}
-
-@media(max-width:768px){
-
-.hero-title{
-font-size:42px;
-}
-
-.hero-subtitle{
-font-size:18px;
-}
-
-.logo{
-width:250px;
-}
-
-.grid{
-grid-template-columns:1fr;
-}
-
-.section-title{
-font-size:32px;
-}
-
-.project-title{
-font-size:24px;
-}
-
-}
-
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif}
+:root{--bg:#050505;--card:#111;--border:#222;--text:#fff;--muted:#9ca3af;--cyan:#00E5FF;--violet:#8C52FF}
+body{background:var(--bg);color:var(--text);overflow-x:hidden}
+.bg1,.bg2{position:fixed;width:700px;height:700px;border-radius:50%;filter:blur(140px);opacity:.12;pointer-events:none}
+.bg1{background:var(--cyan);top:-200px;left:-200px;animation:float1 18s ease-in-out infinite}
+.bg2{background:var(--violet);right:-200px;bottom:-200px;animation:float2 22s ease-in-out infinite}
+@keyframes float1{50%{transform:translate(180px,120px)}}
+@keyframes float2{50%{transform:translate(-180px,-120px)}}
+.container{max-width:1200px;margin:auto;padding:40px 20px;position:relative}
+.hero{min-height:65vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.logo{width:520px;max-width:95%;filter:drop-shadow(0 0 25px rgba(0,229,255,.2)) drop-shadow(0 0 40px rgba(140,82,255,.2))}
+h1{font-size:78px;font-weight:800;line-height:1;background:linear-gradient(90deg,var(--cyan),var(--violet));-webkit-background-clip:text;color:transparent;margin-top:20px}
+.sub{margin-top:16px;color:var(--muted);font-size:22px}
+.buttons{display:flex;gap:12px;margin-top:30px;flex-wrap:wrap}
+.btn{padding:15px 28px;border-radius:14px;text-decoration:none;font-weight:700}
+.primary{background:linear-gradient(90deg,var(--cyan),var(--violet));color:#fff}
+.secondary{background:#151515;color:#fff;border:1px solid #333}
+.section{margin-top:80px}
+.section h2{font-size:42px;margin-bottom:25px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:24px;overflow:hidden}
+.video{position:relative;padding-bottom:56.25%;height:0}
+.video iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
+.info{padding:20px}
+.title{font-size:28px;font-weight:800}
+.type{margin-top:8px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.services{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.service{background:#111;border:1px solid #222;border-radius:18px;padding:20px;text-align:center}
+.footer{text-align:center;padding:80px 0}
+.footer p{color:var(--muted);margin:12px 0 25px}
+@media(max-width:900px){h1{font-size:42px}.logo{width:280px}.grid,.services{grid-template-columns:1fr}.sub{font-size:18px}}
 </style>
-
 </head>
-
 <body>
-
+<div class="bg1"></div><div class="bg2"></div>
 <div class="container">
-
 <section class="hero">
-
-<img src="nova-logo.png" class="logo" alt="Nova Logo">
-
-<h1 class="hero-title">
-Video Editor
-<br>
-Content Studio
-</h1>
-
-<p class="hero-subtitle">
-Podcasts • Entertainment • YouTube • Shorts
-</p>
-
+<img src="nova-logo.png" class="logo">
+<h1>EDIT. CREATE. ELEVATE.</h1>
+<p class="sub">Podcast Editing • Shorts • YouTube Content</p>
 <div class="buttons">
-
-<a href="mailto:jsutreja@gmail.com" class="btn primary">
-Contact
-</a>
-
-<a href="https://wa.me/919998544660" target="_blank" class="btn secondary">
-WhatsApp
-</a>
-
+<a href="mailto:jsutreja@gmail.com" class="btn primary">Contact</a>
+<a href="https://wa.me/919998544660" class="btn secondary">WhatsApp</a>
 </div>
-
 </section>
 
 <section class="section">
-
-<h2 class="section-title">
-Featured Project
-</h2>
-```
-```html
-<div class="featured"
-onclick="openVideo('aRLhpHu6KCI','What Is Self-Compassion?')">
-
-<div class="thumb">
-
-<img
-src="https://img.youtube.com/vi/aRLhpHu6KCI/maxresdefault.jpg"
-alt="What Is Self Compassion">
-
-<div class="play">
-<span>▶</span>
+<h2>Featured Project</h2>
+<div class="card">
+<div class="video"><iframe src="https://www.youtube.com/embed/aRLhpHu6KCI" allowfullscreen></iframe></div>
+<div class="info"><div class="title">What Is Self‑Compassion?</div><div class="type">Podcast Editing</div></div>
 </div>
-
-</div>
-
-<div class="content">
-
-<div class="project-title">
-What Is Self-Compassion?
-</div>
-
-<div class="project-type">
-Podcast Editing
-</div>
-
-<div class="watch">
-Play Video →
-</div>
-
-</div>
-
-</div>
-
 </section>
 
 <section class="section">
-
-<h2 class="section-title">
-Selected Work
-</h2>
-
+<h2>Selected Work</h2>
 <div class="grid">
-
-<div class="card"
-onclick="openVideo('CdgVcAEEMC4','Do Millennials Know 2000s Songs?!')">
-
-<div class="thumb">
-
-<img
-src="https://img.youtube.com/vi/CdgVcAEEMC4/maxresdefault.jpg">
-
-<div class="play">
-<span>▶</span>
+<div class="card"><div class="video"><iframe src="https://www.youtube.com/embed/CdgVcAEEMC4" allowfullscreen></iframe></div><div class="info"><div class="title">Do Millennials Know 2000s Songs?!</div><div class="type">Entertainment</div></div></div>
+<div class="card"><div class="video"><iframe src="https://www.youtube.com/embed/wAxAAnMFlMc" allowfullscreen></iframe></div><div class="info"><div class="title">100 Years Of Snacks</div><div class="type">Entertainment</div></div></div>
+<div class="card"><div class="video"><iframe src="https://www.youtube.com/embed/hCi0mgS7ZEc" allowfullscreen></iframe></div><div class="info"><div class="title">Top 3 Testosterone Exercises</div><div class="type">Educational Content</div></div></div>
+<div class="card"><div class="video"><iframe src="https://www.youtube.com/embed/bdrkjMIhrDs" allowfullscreen></iframe></div><div class="info"><div class="title">Little Five Points</div><div class="type">Storytelling</div></div></div>
 </div>
+</section>
 
+<section class="section">
+<h2>Services</h2>
+<div class="services">
+<div class="service">Podcast Editing</div>
+<div class="service">Short Form Content</div>
+<div class="service">YouTube Videos</div>
+<div class="service">Storytelling</div>
+<div class="service">Social Media Ads</div>
 </div>
-
-<div class="content">
-
-<div class="project-title">
-Do Millennials Know 2000s Songs?!
-</div>
-
-<div class="project-type">
-Entertainment
-</div>
-
-<div class="watch">
-Play Video →
-</div>
-
-</div>
-
-</div>
-
-<div class="card"
-onclick="openVideo('wAxAAnMFlMc','100 Years Of Snacks')">
-
-<div class="thumb">
-
-<img
-src="https://img.youtube.com/vi/wAxAAnMFlMc/maxresdefault.jpg">
-
-<div class="play">
-<span>▶</span>
-</div>
-
-</div>
-
-<div class="content">
-
-<div class="project-title">
-100 Years Of Snacks
-</div>
-
-<div class="project-type">
-Entertainment
-</div>
-
-<div class="watch">
-Play Video →
-</div>
-
-</div>
-
-</div>
-
-<div class="card"
-onclick="openVideo('hCi0mgS7ZEc','Top 3 Testosterone Exercises')">
-
-<div class="thumb">
-
-<img
-src="https://img.youtube.com/vi/hCi0mgS7ZEc/hqdefault.jpg">
-
-<div class="play">
-<span>▶</span>
-</div>
-
-</div>
-
-<div class="content">
-
-<div class="project-title">
-Top 3 Testosterone Exercises
-</div>
-
-<div class="project-type">
-Educational Content
-</div>
-
-<div class="watch">
-Play Video →
-</div>
-
-</div>
-
-</div>
-
-<div class="card"
-onclick="openVideo('bdrkjMIhrDs','Little Five Points')">
-
-<div class="thumb">
-
-<img
-src="https://img.youtube.com/vi/bdrkjMIhrDs/maxresdefault.jpg">
-
-<div class="play">
-<span>▶</span>
-</div>
-
-</div>
-
-<div class="content">
-
-<div class="project-title">
-Little Five Points
-</div>
-
-<div class="project-type">
-Storytelling
-</div>
-
-<div class="watch">
-Play Video →
-</div>
-
-</div>
-
-</div>
-
-</div>
-
 </section>
 
 <section class="footer">
-
-<h2>
-Let's Work Together
-</h2>
-
-<p>
-Need podcast editing, YouTube videos,
-short-form content or social media ads?
-</p>
-
-<div class="buttons">
-
-<a
-href="mailto:jsutreja@gmail.com"
-class="btn primary">
-Email Me
-</a>
-
-<a
-href="https://wa.me/919998544660"
-target="_blank"
-class="btn secondary">
-WhatsApp
-</a>
-
+<h2>Let's Work Together</h2>
+<p>Need podcast editing, YouTube videos, shorts or ads?</p>
+<div class="buttons" style="justify-content:center">
+<a href="mailto:jsutreja@gmail.com" class="btn primary">Email Me</a>
+<a href="https://wa.me/919998544660" class="btn secondary">WhatsApp</a>
 </div>
-
 </section>
-
 </div>
-
-<!-- VIDEO MODAL -->
-
-<div class="modal" id="videoModal">
-
-<div class="modal-content">
-
-<div
-class="close"
-onclick="closeVideo()">
-✕
-</div>
-
-<div class="video-wrapper">
-
-<iframe
-id="videoFrame"
-allowfullscreen
-allow="autoplay; encrypted-media">
-</iframe>
-
-</div>
-
-</div>
-
-</div>
-
-<script>
-
-function openVideo(videoId){
-
-document.getElementById('videoModal').style.display='block';
-
-document.getElementById('videoFrame').src =
-'https://www.youtube.com/embed/' +
-videoId +
-'?autoplay=1&rel=0';
-
-document.body.style.overflow='hidden';
-
-}
-
-function closeVideo(){
-
-document.getElementById('videoModal').style.display='none';
-
-document.getElementById('videoFrame').src='';
-
-document.body.style.overflow='auto';
-
-}
-
-window.onclick=function(event){
-
-const modal =
-document.getElementById('videoModal');
-
-if(event.target===modal){
-
-closeVideo();
-
-}
-
-}
-
-document.addEventListener('keydown',function(e){
-
-if(e.key==='Escape'){
-
-closeVideo();
-
-}
-
-});
-
-</script>
-
 </body>
-</html>
-```
+</html>"""
+path="/mnt/data/NOVA_Final_Website.html"
+Path(path).write_text(html, encoding="utf-8")
+print(path)
