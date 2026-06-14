@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Editor Portfolio</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background-color: #0d0e12; color: #ffffff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; padding: 40px 20px; }
+        .container { max-width: 1000px; margin: 0 auto; }
+        
+        /* Header Section */
+        header { text-align: center; margin-bottom: 60px; }
+        h1 { font-size: 2.5rem; margin-bottom: 15px; letter-spacing: -0.5px; }
+        p.subtitle { color: #8a8f98; font-size: 1.1rem; max-width: 600px; margin: 0 auto; line-height: 1.6; }
+        
+        /* Video Grid */
+        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 30px; margin-bottom: 60px; }
+        @media(max-width: 500px) { .portfolio-grid { grid-template-columns: 1fr; } }
+        .card { background: #161920; border: 1px solid #222630; border-radius: 12px; overflow: hidden; transition: transform 0.2s; }
+        .card:hover { transform: translateY(-4px); }
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+        .card-info { padding: 20px; }
+        .card-title { font-size: 1.2rem; margin-bottom: 8px; font-weight: 600; }
+        .card-desc { color: #8a8f98; font-size: 0.95rem; line-height: 1.4; }
+        
+        /* CTA Section */
+        .cta { text-align: center; background: linear-gradient(135deg, #1e1b4b 0%, #311042 100%); padding: 40px; border-radius: 16px; border: 1px solid #3b2063; }
+        .cta h2 { margin-bottom: 10px; font-size: 1.8rem; }
+        .cta p { color: #c7adff; margin-bottom: 25px; }
+        .btn { display: inline-block; background: #ffffff; color: #000000; padding: 12px 30px; border-radius: 8px; font-weight: 600; text-decoration: none; transition: background 0.2s; }
+        .btn:hover { background: #e2e2e2; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>Hi, I'm [Your Name]</h1>
+            <p class="subtitle">I craft high-retention social media cuts, YouTube video essays, and motion graphics using Premiere Pro & After Effects.</p>
+        </header>
+
+        <!-- Portfolio Grid -->
+        <section class="portfolio-grid">
+            
+            <!-- Video Item 1 -->
+            <div class="card">
+                <div class="video-container">
+                    <!-- REPLACE THE LINK BELOW WITH YOUR YOUTUBE EMBED LINK -->
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+                </div>
+                <div class="card-info">
+                    <div class="card-title">🔥 Short-Form Retaining Edit</div>
+                    <div class="card-desc">Fast pacing, custom text layouts, and deep sound design designed to stop the scroll.</div>
+                </div>
+            </div>
+
+            <!-- Video Item 2 -->
+            <div class="card">
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+                </div>
+                <div class="card-info">
+                    <div class="card-title">🎬 YouTube Video Essay / Storytelling</div>
+                    <div class="card-desc">Focus on narrative pacing, color correction, and smooth B-roll integration.</div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Call To Action -->
+        <section class="cta">
+            <h2>Let's work together</h2>
+            <p>Need polished, engaging videos for your brand or channel?</p>
+            <a href="mailto:your-email@gmail.com" class="btn">Get In Touch</a>
+        </section>
+    </div>
+
+</body>
+</html>
